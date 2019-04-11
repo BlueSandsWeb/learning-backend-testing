@@ -1,5 +1,13 @@
 // Update with your config settings.
 
+const localPg = { // for local postgres
+  host: 'localhost',
+  database: 'hobbits',
+  user: 'students',
+  password: 'hired'
+}
+const productionDbConnection = process.env.DATABASE_URL || localPg;
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -27,4 +35,14 @@ module.exports = {
       directory: './data/seeds',
     },
   },
+  production: {
+    client: 'pg',
+    connection: productionDbConnection, //could be an object or a string, see above
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  }
 };
